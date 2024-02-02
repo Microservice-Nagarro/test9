@@ -25,18 +25,18 @@ if (!builder.Environment.IsDevelopment())
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// The following line enables Application Insights telemetry collection.
+// Enable Application Insights telemetry collection.
 if (!builder.Environment.IsDevelopment())
 {
     builder.Services.AddApplicationInsightsTelemetry();
     builder.Services.AddServiceProfiler();
 }
 
-// Adding health check services
+// Add health check.
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
