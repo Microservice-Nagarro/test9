@@ -1,0 +1,12 @@
+﻿apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mymicroservice-configmap # Rename me
+data:
+  appsettings.Production.json: |-
+    {
+      "ConnectionStrings": {
+        "KeyVaultUri": "#{KeyVaultUri}#",
+        "ManagedIdentityClientId": "#{ManagedIdentityClientId}#"
+      }
+    }

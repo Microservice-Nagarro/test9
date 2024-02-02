@@ -1,0 +1,68 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mymicroservice-microservice # Rename me
+spec:
+  selector:
+    matchLabels:
+      app: mymicroservice-microservice
+  template:
+    metadata:
+      labels:
+        app: mymicroservice-microservice
+    spec:
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app: mymicroservice-microservice
+      nodeSelector:
+        "kubernetes.io/os": linux
+      containers:
+      - name: mymicroservice-microservice
+        image: #{ContainerReg}#.azurecr.io/bhf.ms.mymicroservice:#{BuildRef}#
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /healthz/live
+            port: 80
+          periodSeconds: 60
+          timeoutSeconds: 30
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz/ready
+            port: 80
+          periodSeconds: 60
+          timeoutSeconds: 30
+          failureThreshold: 3
+        volumeMounts:
+        - name: appsettings-volume
+          mountPath: /app/appsettings.Production.json
+          subPath: appsettings.Production.json
+        resources:
+          requests:
+            cpu: 50m
+            memory: 512Mi
+          limits:
+            memory: 512Mi
+      volumes:
+      - name: appsettings-volume
+        configMap:
+          name: mymicroservice-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mymicroservice-microservice
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  selector:
+    app: mymicroservice-microservice
+  type: LoadBalancer
+  ports:
+  - port: 80
