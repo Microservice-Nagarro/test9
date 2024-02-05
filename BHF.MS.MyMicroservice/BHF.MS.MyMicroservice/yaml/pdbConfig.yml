@@ -1,7 +1,7 @@
 ﻿apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: mymicroservice-pdb # Rename me
+  name: mymicroservice-pdb # Change me
 spec:
   minAvailable: 2
   selector:

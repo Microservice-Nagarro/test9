@@ -1,7 +1,7 @@
 ﻿apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mymicroservice-microservice # Rename me
+  name: mymicroservice-microservice # Change me
 spec:
   selector:
     matchLabels:

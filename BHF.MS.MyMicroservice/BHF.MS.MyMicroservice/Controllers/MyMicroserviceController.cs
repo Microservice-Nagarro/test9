@@ -10,7 +10,7 @@ namespace BHF.MS.MyMicroservice.Controllers
 
         public MyMicroserviceController(ILogger<MyMicroserviceController> logger)
         {
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger)); ;
         }
 
         [HttpGet]

@@ -1,7 +1,7 @@
 ﻿apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: mymicroservice-autoscaler # Rename me
+  name: mymicroservice-autoscaler # Change me
   namespace: default
 spec:
   scaleTargetRef:
