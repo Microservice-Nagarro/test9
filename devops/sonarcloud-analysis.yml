@@ -1,0 +1,62 @@
+#name: 'SonarCloud Build & Analysis'
+pr: none
+trigger: none
+
+resources:
+  repositories:
+  - repository: BHF.Microservices
+    type: github
+    endpoint: github.com_wcheung-bhf
+    name: BHFDigital/BHF.Microservices
+    ref: main
+
+variables:
+- name: azureSubscription
+  value: 'BHF Shared_NonProd (e014a007-5eec-4a79-9925-752b25ea2aa6)'
+- name: containerRegistryConnection
+  value: 'BHF-ACR Connection'
+- name: repository
+  value: 'BHF.MS.MyMicroservice' # Change me
+- name: dockerPath
+  value: 'BHF.MS.MyMicroservice' #
+- name: sonarCloud
+  value: 'SonarCloud BHF.Website'
+- name: organization
+  value: 'bhf-digital'
+- name: projectKey
+  value: 'BHFDigital_BHF.MS.MyMicroservice' #
+- name: projectName
+  value: 'BHF.MS.MyMicroservice' #
+
+pool:
+  vmImage: 'windows-latest'
+
+stages:
+  - stage: 'Build_and_Publish_Microservice'
+    displayName: 'Build and Publish Microservice'
+    jobs:
+    - job: 'Build_Microservice'
+      displayName: 'Build Microservice'
+      steps:
+        - checkout: self
+        - checkout: BHF.Microservices
+          displayName: 'Checkout BHF.Microservices'
+        - template: /devops/templates/build/configure-code-analysis.yml@BHF.Microservices
+          parameters:
+            sonarCloud:   '$(sonarCloud)'
+            organization: '$(organization)'
+            projectKey:   '$(projectKey)'
+            projectName:  '$(projectName)'
+        - template: /devops/templates/build/build-microservice.yml@BHF.Microservices
+          parameters:
+            containerRegistryConnection: '$(containerRegistryConnection)'
+            repository:                  '$(repository)'
+            dockerPath:                  '$(dockerPath)'
+            publish:                     'N'
+        - template: /devops/templates/build/run-unit-tests.yml@BHF.Microservices
+        - template: /devops/templates/build/run-owasp-dependency-check.yml@BHF.Microservices
+          parameters:
+            azureSubscription: $(azureSubscription)
+            projectName:       '$(projectName)'
+            keyvaultName:      'uks-common-kvlt'        
+        - template: /devops/templates/build/run-code-analysis.yml@BHF.Microservices

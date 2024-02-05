@@ -1,0 +1,75 @@
+pr: none
+trigger: none
+
+parameters:
+- name: DeployConfigMap
+  displayName: "Deploy Config Map"
+  type: boolean
+  default: false
+
+resources:
+  repositories:
+  - repository: BHF.Microservices
+    type: github
+    endpoint: github.com_wcheung-bhf
+    name: BHFDigital/BHF.Microservices
+    ref: main
+
+variables:
+- name: azureSubscription
+  value: 'BHF Shared_NonProd (e014a007-5eec-4a79-9925-752b25ea2aa6)'
+- name: containerRegistry
+  value: 'bhfmicroservices'
+- name: containerRegistryConnection
+  value: 'BHF-ACR Connection'
+- name: repository
+  value: 'BHF.MS.MyMicroservice' # Change me
+- name: dockerPath
+  value: 'BHF.MS.MyMicroservice' #
+
+stages:
+  - stage: 'Build_and_Publish_Microservice'
+    displayName: 'Build and Publish Microservice'
+    jobs:
+    - job: 'Build_Microservice'
+      displayName: 'Build Microservice'
+      steps:
+        - checkout: self
+        - checkout: BHF.Microservices
+          displayName: 'Checkout BHF.Microservices'
+        - template: /devops/templates/build/build-microservice.yml@BHF.Microservices
+          parameters:
+            containerRegistryConnection: '$(containerRegistryConnection)'
+            repository:                  '$(repository)'
+            dockerPath:                  '$(dockerPath)'
+            publish:                     'Y'
+            
+  - stage: Deploy_To_Development
+    displayName: 'Deploy to Development'
+    condition: succeeded()
+    jobs:
+      - deployment: 'Deploy_to_Kubernetes'
+        displayName: 'Deploy to Kubernetes'
+        environment: 'MS-development'
+        variables:
+          - name:  ContainerReg
+            value: $(containerRegistry)
+          - name:  BuildRef
+            value: '$(build.buildnumber)'
+          - name:  KeyVaultUri
+            value: 'https://uks-test-ms-micro-kv.vault.azure.net/' #
+          - name:  ManagedIdentityClientId
+            value: 'a6b8098f-ee26-47e6-8bb8-3b1f30e7ad20'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - checkout: self
+              - checkout: BHF.Microservices
+                displayName: 'Checkout BHF.Microservices'
+              - template: /devops/templates/deploy/deploy-kubernetes.yml@BHF.Microservices
+                parameters:
+                  azureSubscription:  $(azureSubscription)
+                  azureResourceGroup: 'uks-test-microservices-rsg'
+                  kubernetesCluster:  'uks-test-ms-aks'
+                  DeployConfigMap:    '${{parameters.DeployConfigMap}}'
