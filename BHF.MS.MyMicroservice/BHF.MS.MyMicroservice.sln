@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice", "BHF.MS.MyMicroservice\BHF.MS.MyMicroservice.csproj", "{6417CE87-B6E5-4E1C-8488-129C1593748F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHF.MS.MyMicroservice.Tests", "..\tests\BHF.MS.MyMicroservice.Tests\BHF.MS.MyMicroservice.Tests.csproj", "{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6417CE87-B6E5-4E1C-8488-129C1593748F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6417CE87-B6E5-4E1C-8488-129C1593748F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6417CE87-B6E5-4E1C-8488-129C1593748F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
