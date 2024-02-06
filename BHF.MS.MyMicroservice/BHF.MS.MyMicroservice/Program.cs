@@ -1,5 +1,8 @@
 using Azure.Identity;
+using BHF.MS.MyMicroservice.HealthCheck;
+using BHF.MS.MyMicroservice.Models.HealthCheck;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,12 @@ if (!builder.Environment.IsDevelopment())
 }
 
 // Add services to the container.
+builder.Services.AddOptions<HealthCheckSettings>()
+    .Bind(builder.Configuration.GetSection("HealthCheck"))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services.AddTransient<MicroserviceHealthCheck>();
 
 builder.Services.AddControllers();
 
@@ -36,7 +45,11 @@ if (!builder.Environment.IsDevelopment())
 }
 
 // Add health check.
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddCheck<MicroserviceHealthCheck>(
+    nameof(MicroserviceHealthCheck),
+    HealthStatus.Unhealthy,
+    new[] { "ready" });
 
 var app = builder.Build();
 
