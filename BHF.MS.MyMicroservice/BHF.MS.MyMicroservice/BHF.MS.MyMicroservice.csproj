@@ -6,7 +6,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>0bbf224e-8889-4acf-b0a4-429e23f55267</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <ApplicationInsightsResourceId>/subscriptions/e014a007-5eec-4a79-9925-752b25ea2aa6/resourceGroups/uks-microservices-rsg/providers/microsoft.insights/components/uks-ms-pc-ai</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
