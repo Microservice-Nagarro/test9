@@ -34,7 +34,6 @@ builder.Services.AddTransient<MicroserviceHealthCheck>();
 
 builder.Services.AddControllers();
 
-builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Enable Application Insights telemetry collection.
