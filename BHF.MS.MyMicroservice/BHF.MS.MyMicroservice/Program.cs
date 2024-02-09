@@ -41,7 +41,8 @@ if (!builder.Environment.IsDevelopment())
 {
     builder.Services.AddApplicationInsightsTelemetry();
     builder.Services.AddServiceProfiler();
-    builder.Services.AddApplicationInsightsKubernetesEnricher(diagnosticLogLevel: LogLevel.Information);
+    var logLevel = (LogLevel) Enum.Parse(typeof(LogLevel), builder.Configuration["Logging:ApplicationInsights:LogLevel:Default"]!);
+    builder.Services.AddApplicationInsightsKubernetesEnricher(diagnosticLogLevel: logLevel);
 }
 
 // Add health check.
