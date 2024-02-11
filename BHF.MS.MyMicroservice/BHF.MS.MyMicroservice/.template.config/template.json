@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "British Heart Foundation",
+  "classifications": [ "Web", "API" ],
+  "identity": "BHF.MS.MyMicroservice",
+  "name": "BHF Microservice",
+  "shortName": "bhfms",
+  "sourceName":"BHF.MS.MyMicroservice",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
+}
