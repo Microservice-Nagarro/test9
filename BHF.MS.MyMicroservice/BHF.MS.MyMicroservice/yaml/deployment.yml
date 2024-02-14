@@ -28,14 +28,14 @@ spec:
         livenessProbe:
           httpGet:
             path: /healthz/live
-            port: 80
+            port: 8080
           periodSeconds: 60
           timeoutSeconds: 30
           failureThreshold: 3
         readinessProbe:
           httpGet:
             path: /healthz/ready
-            port: 80
+            port: 8080
           periodSeconds: 60
           timeoutSeconds: 30
           failureThreshold: 3

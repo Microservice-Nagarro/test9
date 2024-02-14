@@ -11,7 +11,7 @@ namespace BHF.MS.MyMicroservice.Controllers
         IExampleService2 service2) : ControllerBase
     {
         [HttpGet]
-        public async void Get(ExampleModel requestModel)
+        public async Task Get(ExampleModel requestModel)
         {
             var response = await service1.DoSomethingAsync(requestModel);
             var anotherResponse = await service2.DoSomethingAsync(requestModel);
