@@ -6,7 +6,7 @@ namespace BHF.MS.MyMicroservice.HealthCheck
     {
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(HealthCheckResult.Healthy("Put a description here"));
         }
     }
 }

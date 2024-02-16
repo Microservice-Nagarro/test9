@@ -1,6 +1,8 @@
 using Azure.Identity;
 using BHF.MS.MyMicroservice.HealthCheck;
 using BHF.MS.MyMicroservice.Models.HealthCheck;
+using BHF.MS.MyMicroservice.Models.Settings;
+using BHF.MS.MyMicroservice.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
@@ -25,10 +27,22 @@ if (!builder.Environment.IsDevelopment())
 }
 
 // Add services to the container.
+builder.Services.AddOptions<Service1Settings>()
+    .Bind(builder.Configuration.GetSection("Service1"))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
+builder.Services.AddOptions<Service2Settings>()
+    .Bind(builder.Configuration.GetSection("Service2"))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+
 builder.Services.AddOptions<HealthCheckSettings>()
     .Bind(builder.Configuration.GetSection("HealthCheck"))
     .ValidateDataAnnotations()
     .ValidateOnStart();
+
+builder.Services.AddHttpClient();
 
 builder.Services.AddTransient<MicroserviceHealthCheck>();
 
@@ -36,12 +50,15 @@ builder.Services.AddControllers();
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddTransient<IExampleService1, ExampleService1>();
+builder.Services.AddTransient<IExampleService2, ExampleService2>();
+
 // Enable Application Insights telemetry collection.
 if (!builder.Environment.IsDevelopment())
 {
     builder.Services.AddApplicationInsightsTelemetry();
     builder.Services.AddServiceProfiler();
-    var logLevel = (LogLevel) Enum.Parse(typeof(LogLevel), builder.Configuration["Logging:ApplicationInsights:LogLevel:Default"]!);
+    var logLevel = (LogLevel)Enum.Parse(typeof(LogLevel), builder.Configuration["Logging:ApplicationInsights:LogLevel:Default"]!);
     builder.Services.AddApplicationInsightsKubernetesEnricher(diagnosticLogLevel: logLevel);
 }
 
