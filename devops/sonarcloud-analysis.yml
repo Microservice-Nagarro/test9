@@ -28,9 +28,6 @@ variables:
 - name: projectName
   value: 'BHF.MS.MyMicroservice' #
 
-pool:
-  vmImage: 'windows-latest'
-
 stages:
   - stage: 'Build_and_Publish_Microservice'
     displayName: 'Build and Publish Microservice'
