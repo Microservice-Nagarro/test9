@@ -57,7 +57,7 @@ stages:
           - name:  BuildRef
             value: '$(build.buildnumber)'
           - name:  KeyVaultUri
-            value: 'https://uks-<envid>-ms-pc-kv.vault.azure.net/'
+            value: 'https://<keyvault_uri>.vault.azure.net/'
           - name:  ManagedIdentityClientId
             value: <managed_indentity_clientid>
 
