@@ -19,13 +19,13 @@ variables:
 - name: azureSubscription
   value: 'BHF Shared_NonProd (e014a007-5eec-4a79-9925-752b25ea2aa6)'
 - name: containerRegistry
-  value: 'bhfmicroservices'
+  value: 'uks<envid>msacr'
 - name: containerRegistryConnection
-  value: 'BHF-ACR Connection'
+  value: 'ACR-<envid>'
 - name: repository
   value: 'BHF.MS.MyMicroservice' # Change me
 - name: dockerPath
-  value: 'BHF.MS.MyMicroservice' #
+  value: 'BHF.MS.MyMicroservice' # Change me
 
 stages:
   - stage: 'Build_and_Publish_Microservice'
@@ -50,16 +50,17 @@ stages:
     jobs:
       - deployment: 'Deploy_to_Kubernetes'
         displayName: 'Deploy to Kubernetes'
-        environment: 'MS-development'
+        environment: 'MS-<envid>'
         variables:
           - name:  ContainerReg
             value: $(containerRegistry)
           - name:  BuildRef
             value: '$(build.buildnumber)'
           - name:  KeyVaultUri
-            value: 'https://uks-test-ms-micro-kv.vault.azure.net/' #
+            value: 'https://<keyvault_uri>.vault.azure.net/'
           - name:  ManagedIdentityClientId
-            value: 'a6b8098f-ee26-47e6-8bb8-3b1f30e7ad20'
+            value: <managed_indentity_clientid>
+
         strategy:
           runOnce:
             deploy:
@@ -70,6 +71,6 @@ stages:
               - template: /devops/templates/deploy/deploy-kubernetes.yml@BHF.Microservices
                 parameters:
                   azureSubscription:  $(azureSubscription)
-                  azureResourceGroup: 'uks-test-microservices-rsg'
-                  kubernetesCluster:  'uks-test-ms-aks'
+                  azureResourceGroup: 'uks-<envid>-microservices-rsg'
+                  kubernetesCluster:  'uks-<envid>-ms-aks'
                   DeployConfigMap:    '${{parameters.DeployConfigMap}}'
