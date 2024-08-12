@@ -1,0 +1,9 @@
+<Project>
+	<PropertyGroup>
+		<!-- Configure analyzers -->
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+		<AnalysisMode>Recommended</AnalysisMode>
+	</PropertyGroup>
+	<!-- Import user file -->
+	<Import Project="Directory.Build.props.user" Condition="Exists('Directory.Build.props.user')" />
+</Project>

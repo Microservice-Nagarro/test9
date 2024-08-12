@@ -7,6 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice", "BH
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice.Tests", "tests\BHF.MS.MyMicroservice.Tests\BHF.MS.MyMicroservice.Tests.csproj", "{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{BF929896-7E34-4471-B1B7-1584D61CBCA9}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.props.user.example = Directory.Build.props.user.example
+		Directory.Build.targets = Directory.Build.targets
+		Directory.Build.targets.user.example = Directory.Build.targets.user.example
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
