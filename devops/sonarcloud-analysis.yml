@@ -49,7 +49,7 @@ stages:
             repository:                  '$(repository)'
             dockerPath:                  '$(dockerPath)'
             publish:                     'N'
-            buildContext:                $(Build.Repository.LocalPath)
+            buildContext:                $(Build.Repository.LocalPath)/$(repository)
         - template: /devops/templates/build/run-unit-tests.yml@BHF.Microservices
         - template: /devops/templates/build/run-owasp-dependency-check.yml@BHF.Microservices
           parameters:
