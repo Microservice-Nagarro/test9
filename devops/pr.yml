@@ -29,8 +29,6 @@ variables:
   value: 'BHFDigital_BHF.MS.Template' # Change me - SonarCloud project key
 - name: projectName
   value: 'BHF.MS.Template' # Change me - SonarCloud project name
-- name: buildContext
-  value: '..\..'
 
 pool:
   demands:
@@ -58,7 +56,7 @@ stages:
             repository:                  '$(repository)'
             dockerPath:                  '$(dockerPath)'
             publish:                     'N'
-            buildContext:                '$(buildContext)'
+            buildContext:                $(Build.Repository.LocalPath)
         - template: /devops/templates/build/run-unit-tests.yml@BHF.Microservices
         - template: /devops/templates/build/run-owasp-dependency-check.yml@BHF.Microservices
           parameters:
