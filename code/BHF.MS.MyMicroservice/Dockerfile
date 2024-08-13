@@ -6,15 +6,13 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["BHF.MS.MyMicroservice/BHF.MS.MyMicroservice.csproj", "BHF.MS.MyMicroservice/"] # Change me
-RUN dotnet restore "BHF.MS.MyMicroservice/BHF.MS.MyMicroservice.csproj"
+COPY [".", "./"]
 
-WORKDIR "/src/BHF.MS.MyMicroservice"
-COPY . .
-RUN dotnet build "BHF.MS.MyMicroservice.csproj" -c Release -o /app/build
+WORKDIR "/src"
+RUN dotnet build "BHF.MS.MyMicroservice.sln" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "BHF.MS.MyMicroservice.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "BHF.MS.MyMicroservice.sln" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

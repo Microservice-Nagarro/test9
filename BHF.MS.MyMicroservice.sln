@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34302.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice", "BHF.MS.MyMicroservice\BHF.MS.MyMicroservice\BHF.MS.MyMicroservice.csproj", "{6417CE87-B6E5-4E1C-8488-129C1593748F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice", "code\BHF.MS.MyMicroservice\BHF.MS.MyMicroservice.csproj", "{6417CE87-B6E5-4E1C-8488-129C1593748F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice.Tests", "tests\BHF.MS.MyMicroservice.Tests\BHF.MS.MyMicroservice.Tests.csproj", "{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}"
 EndProject
