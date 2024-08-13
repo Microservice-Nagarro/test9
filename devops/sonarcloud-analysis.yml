@@ -1,4 +1,3 @@
-#name: 'SonarCloud Build & Analysis'
 pr: none
 trigger: none
 
@@ -16,17 +15,17 @@ variables:
 - name: containerRegistryConnection
   value: 'BHF-ACR Connection'
 - name: repository
-  value: 'BHF.MS.MyMicroservice' # Change me
+  value: 'BHF.MS.Template' # Change me
 - name: dockerPath
-  value: 'BHF.MS.MyMicroservice' #
+  value: 'BHF.MS.MyMicroservice/BHF.MS.MyMicroservice' # Change me - relative path to the folder containing Dockerfile
 - name: sonarCloud
   value: 'SonarCloud BHF.Website'
 - name: organization
   value: 'bhf-digital'
 - name: projectKey
-  value: 'BHFDigital_BHF.MS.MyMicroservice' #
+  value: 'BHFDigital_BHF.MS.Template' # Change me - SonarCloud project key
 - name: projectName
-  value: 'BHF.MS.MyMicroservice' #
+  value: 'BHF.MS.Template' # Change me - SonarCloud project name
 
 stages:
   - stage: 'Build_and_Publish_Microservice'
