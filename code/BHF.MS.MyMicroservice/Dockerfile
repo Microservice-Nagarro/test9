@@ -5,8 +5,7 @@ WORKDIR /app
 EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
-COPY [".", "./"]
+COPY [".", "./src"]
 
 WORKDIR "/src"
 RUN dotnet build "BHF.MS.MyMicroservice.sln" -c Release -o /app/build
