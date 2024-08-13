@@ -9,8 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice.Tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{BF929896-7E34-4471-B1B7-1584D61CBCA9}"
 	ProjectSection(SolutionItems) = preProject
-		.gitattributes = .gitattributes
 		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.props.user.example = Directory.Build.props.user.example
