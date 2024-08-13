@@ -19,6 +19,6 @@ namespace BHF.MS.MyMicroservice.Models
         [Phone]
         public required string Phone { get; set; }
 
-        public Dictionary<string, string> Customisations { get; set; } = new();
+        public Dictionary<string, string>? Customisations { get; set; }
     }
 }

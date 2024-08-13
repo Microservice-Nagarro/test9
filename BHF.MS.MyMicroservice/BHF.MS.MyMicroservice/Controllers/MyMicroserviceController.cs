@@ -7,17 +7,15 @@ namespace BHF.MS.MyMicroservice.Controllers
     [ApiController]
     [Route("[controller]")]
     public class MyMicroserviceController(ILogger<MyMicroserviceController> logger,
-        IExampleService1 service1,
-        IExampleService2 service2) : ControllerBase
+        IExampleService service) : ControllerBase
     {
         [HttpGet]
-        public async Task Get(ExampleModel requestModel)
+        public async Task Get([FromQuery]ExampleModel requestModel)
         {
-            var response = await service1.DoSomethingAsync(requestModel);
-            var anotherResponse = await service2.DoSomethingAsync(requestModel);
+            var response = await service.DoSomethingAsync(requestModel);
 
             // Logger messages should be formatted like so to avoid CA2254 warnings. Please avoid concatenation and interpolation.
-            logger.LogWarning("Responses {response} and {anotherResponse} are invalid!", response, anotherResponse);
+            logger.LogWarning("Responses {Response} are invalid!", response);
         }
     }
 }
