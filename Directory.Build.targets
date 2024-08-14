@@ -1,4 +1,16 @@
 <Project>
+	<!--Checking if test projects are created -->
+	<Target Name="CheckTestProjectsExist" BeforeTargets="AfterBuild" Condition="'$(ValidateTestProjectsExist)' == 'True'">
+		<ItemGroup>
+			<ProjectReference>
+				<TestProjectPath>$([System.String]::Copy('%(FullPath)').Replace('\code\%(ProjectReference.DefiningProjectName)\%(ProjectReference.DefiningProjectName)', '\tests\%(ProjectReference.DefiningProjectName).Tests\%(ProjectReference.DefiningProjectName).Tests'))</TestProjectPath>
+			</ProjectReference>
+		</ItemGroup>
+		<Message Importance="high" Text="Validating test projects" />
+		<Message Importance="high" Text="Unit Test project is missing: %(ProjectReference.TestProjectPath)" Condition="'%(ProjectReference.TestProjectPath)' != '' And !Exists('%(ProjectReference.TestProjectPath)')"/>
+		<Error Text="At least one Unit Test project is missing. Read previous logs for more details." Condition="'%(ProjectReference.TestProjectPath)' != '' And !Exists('%(ProjectReference.TestProjectPath)')"/>
+	</Target>
+
 	<!-- Import user file -->
 	<Import Project="Directory.Build.targets.user" Condition="Exists('Directory.Build.targets.user')" />
 </Project>

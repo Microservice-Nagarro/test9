@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BHF.MS.MyMicroservice.Models
 {
+    [ExcludeFromCodeCoverage]
     public class ExampleModel
     {
         public int Id { get; set; }

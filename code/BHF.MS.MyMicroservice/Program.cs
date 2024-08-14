@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace BHF.MS.MyMicroservice
 {
+    [ExcludeFromCodeCoverage]
     internal static class Program
     {
         public static async Task Main(string[] args)
@@ -14,7 +17,7 @@ namespace BHF.MS.MyMicroservice
             builder.Services.AddSwaggerGen();
 
             DependencyInjectionInitializers.AddApplicationInsights(builder);
-            DependencyInjectionInitializers.AddHealthCheckConfiguration(builder.Services);
+            Database.DependencyInjectionInitializers.AddHealthCheckConfiguration(builder.Services);
 
             var app = builder.Build();
 

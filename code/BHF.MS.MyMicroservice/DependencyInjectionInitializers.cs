@@ -1,25 +1,17 @@
 ﻿using Azure.Identity;
-using BHF.MS.MyMicroservice.HealthCheck;
-using BHF.MS.MyMicroservice.Models.HealthCheck;
 using BHF.MS.MyMicroservice.Models.Settings;
 using BHF.MS.MyMicroservice.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
+using System.Diagnostics.CodeAnalysis;
+using BHF.MS.MyMicroservice.Database.HealthCheck;
+using BHF.MS.MyMicroservice.Database.Models.HealthCheck;
 
 namespace BHF.MS.MyMicroservice
 {
+    [ExcludeFromCodeCoverage]
     public static class DependencyInjectionInitializers
     {
-        public static void AddHealthCheckConfiguration(IServiceCollection serviceCollection)
-        {
-            serviceCollection.AddHealthChecks()
-                .AddCheck<MicroserviceHealthCheck>(
-                    nameof(MicroserviceHealthCheck),
-                    HealthStatus.Unhealthy,
-                    ["ready"]);
-        }
-
         public static void AddOptionsConfiguration(WebApplicationBuilder builder)
         {
             builder.Services.AddOptions<ServiceSettings>()
@@ -38,7 +30,7 @@ namespace BHF.MS.MyMicroservice
             Database.DependencyInjectionInitializers.AddDatabases(serviceCollection);
             Database.DependencyInjectionInitializers.AddCustomServices(serviceCollection);
 
-            serviceCollection.AddTransient<MicroserviceHealthCheck>();
+            serviceCollection.AddTransient<DbHealthCheck>();
             serviceCollection.AddTransient<IExampleService, ExampleService>();
 
             AddHttpClients(serviceCollection);

@@ -1,4 +1,4 @@
-﻿using BHF.MS.MyMicroservice.Database.Dto;
+﻿using BHF.MS.MyMicroservice.Database.Models.DbItem;
 
 namespace BHF.MS.MyMicroservice.Database.Services
 {

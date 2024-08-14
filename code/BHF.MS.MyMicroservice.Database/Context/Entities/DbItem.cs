@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BHF.MS.MyMicroservice.Database.Dto;
+using System.Diagnostics.CodeAnalysis;
+using BHF.MS.MyMicroservice.Database.Models.DbItem;
 
-namespace BHF.MS.MyMicroservice.Database.Context.Models
+namespace BHF.MS.MyMicroservice.Database.Context.Entities
 {
+    [ExcludeFromCodeCoverage]
     public class DbItem
     {
         public Guid Id { get; set; }

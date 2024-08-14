@@ -1,6 +1,6 @@
 ﻿using BHF.MS.MyMicroservice.Database.Context;
-using BHF.MS.MyMicroservice.Database.Context.Models;
-using BHF.MS.MyMicroservice.Database.Dto;
+using BHF.MS.MyMicroservice.Database.Context.Entities;
+using BHF.MS.MyMicroservice.Database.Models.DbItem;
 using Microsoft.EntityFrameworkCore;
 
 namespace BHF.MS.MyMicroservice.Database.Services

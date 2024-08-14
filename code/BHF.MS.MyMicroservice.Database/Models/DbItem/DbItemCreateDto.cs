@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
-using BHF.MS.MyMicroservice.Database.Context.Models;
 
-namespace BHF.MS.MyMicroservice.Database.Dto
+namespace BHF.MS.MyMicroservice.Database.Models.DbItem
 {
     public class DbItemCreateDto
     {
@@ -12,7 +11,7 @@ namespace BHF.MS.MyMicroservice.Database.Dto
         {
         }
 
-        public DbItemCreateDto(DbItem dbItem)
+        public DbItemCreateDto(Context.Entities.DbItem dbItem)
         {
             Name = dbItem.Name;
         }

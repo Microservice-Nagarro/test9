@@ -1,10 +1,16 @@
-﻿using BHF.MS.MyMicroservice.Database.Context.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
+using BHF.MS.MyMicroservice.Database.Context.Entities;
 
 namespace BHF.MS.MyMicroservice.Database.Context
 {
+    [ExcludeFromCodeCoverage]
     public class CustomDbContext(DbContextOptions<CustomDbContext> options) : DbContext(options)
     {
-        public DbSet<DbItem> DbItems { get; set; }
+        protected CustomDbContext() : this(new DbContextOptions<CustomDbContext>())
+        {
+        }
+
+        public virtual DbSet<DbItem> DbItems { get; set; }
     }
 }

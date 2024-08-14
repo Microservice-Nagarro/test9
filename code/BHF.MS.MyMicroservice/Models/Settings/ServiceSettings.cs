@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BHF.MS.MyMicroservice.Models.Settings
 {
+    [ExcludeFromCodeCoverage]
     public class ServiceSettings
     {
         [Required(ErrorMessage = "Name required")]
