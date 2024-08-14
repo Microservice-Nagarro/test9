@@ -15,7 +15,7 @@ namespace BHF.MS.MyMicroservice.Database.Services
                 .Select(x => new DbItemDto(x)).ToListAsync();
         }
 
-        public async Task<DbItemDto?> Get(Guid id)
+        public async Task<DbItemDto?> GetById(Guid id)
         {
             return await context.DbItems.Where(x => x.Id == id).Select(x => new DbItemDto(x)).FirstOrDefaultAsync();
         }

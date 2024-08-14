@@ -25,7 +25,7 @@ namespace BHF.MS.MyMicroservice.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<DbItemDto>> GetDbItem(Guid id)
         {
-            var dbItem = await dbItemService.Get(id);
+            var dbItem = await dbItemService.GetById(id);
 
             if (dbItem == null)
             {

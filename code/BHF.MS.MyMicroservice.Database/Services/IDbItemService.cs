@@ -6,7 +6,7 @@ namespace BHF.MS.MyMicroservice.Database.Services
     {
         public Task<IList<DbItemDto>> GetAll();
 
-        public Task<DbItemDto?> Get(Guid id);
+        public Task<DbItemDto?> GetById(Guid id);
 
         public Task<bool> Update(DbItemDto model);
 
