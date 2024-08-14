@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using BHF.MS.MyMicroservice.Database.Models;
+using BHF.MS.MyMicroservice.Database.Context.Models;
 
 namespace BHF.MS.MyMicroservice.Database.Dto
 {

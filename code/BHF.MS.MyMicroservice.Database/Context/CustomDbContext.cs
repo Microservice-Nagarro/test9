@@ -1,7 +1,7 @@
-﻿using BHF.MS.MyMicroservice.Database.Models;
+﻿using BHF.MS.MyMicroservice.Database.Context.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BHF.MS.MyMicroservice.Database
+namespace BHF.MS.MyMicroservice.Database.Context
 {
     public class CustomDbContext(DbContextOptions<CustomDbContext> options) : DbContext(options)
     {

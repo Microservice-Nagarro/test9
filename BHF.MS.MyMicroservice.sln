@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configurat
 		Directory.Build.targets.user.example = Directory.Build.targets.user.example
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHF.MS.MyMicroservice.Database", "code\BHF.MS.MyMicroservice.Database\BHF.MS.MyMicroservice.Database.csproj", "{59310B83-A09C-4366-B44A-DC9B682BB9F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBD06C78-6EB2-46E7-AB8A-9A58FAF54E7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59310B83-A09C-4366-B44A-DC9B682BB9F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59310B83-A09C-4366-B44A-DC9B682BB9F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59310B83-A09C-4366-B44A-DC9B682BB9F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59310B83-A09C-4366-B44A-DC9B682BB9F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

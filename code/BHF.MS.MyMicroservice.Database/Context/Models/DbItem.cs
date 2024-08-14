@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BHF.MS.MyMicroservice.Database.Dto;
 
-namespace BHF.MS.MyMicroservice.Database.Models
+namespace BHF.MS.MyMicroservice.Database.Context.Models
 {
     public class DbItem
     {
