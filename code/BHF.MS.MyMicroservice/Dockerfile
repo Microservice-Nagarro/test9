@@ -11,11 +11,11 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY [".", "./"]
 
-RUN dotnet build "BHF.MS.MyMicroservice.sln" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "BHF.MS.MyMicroservice.sln" -c $BUILD_CONFIGURATION
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "BHF.MS.MyMicroservice.sln" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "BHF.MS.MyMicroservice.sln" -c $BUILD_CONFIGURATION /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

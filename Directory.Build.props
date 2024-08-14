@@ -5,6 +5,8 @@
 		<AnalysisMode>Recommended</AnalysisMode>
 		<Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);CS1591;CS1573</NoWarn>
 	</PropertyGroup>
 	<!-- Import user file -->
 	<Import Project="Directory.Build.props.user" Condition="Exists('Directory.Build.props.user')" />
