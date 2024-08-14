@@ -10,19 +10,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configurat
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		CodeCoverage.runsettings = CodeCoverage.runsettings
 		Directory.Build.props = Directory.Build.props
 		Directory.Build.props.user.example = Directory.Build.props.user.example
 		Directory.Build.targets = Directory.Build.targets
 		Directory.Build.targets.user.example = Directory.Build.targets.user.example
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHF.MS.MyMicroservice.Database", "code\BHF.MS.MyMicroservice.Database\BHF.MS.MyMicroservice.Database.csproj", "{59310B83-A09C-4366-B44A-DC9B682BB9F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice.Database", "code\BHF.MS.MyMicroservice.Database\BHF.MS.MyMicroservice.Database.csproj", "{59310B83-A09C-4366-B44A-DC9B682BB9F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C14A1192-F054-4BD9-9B95-DFE390B80826}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHF.MS.MyMicroservice.Tests", "tests\BHF.MS.MyMicroservice.Tests\BHF.MS.MyMicroservice.Tests.csproj", "{65D95A7D-3897-43E3-AE9D-40BC8260DD1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice.Tests", "tests\BHF.MS.MyMicroservice.Tests\BHF.MS.MyMicroservice.Tests.csproj", "{65D95A7D-3897-43E3-AE9D-40BC8260DD1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BHF.MS.MyMicroservice.Database.Tests", "tests\BHF.MS.MyMicroservice.Database.Tests\BHF.MS.MyMicroservice.Database.Tests.csproj", "{C03E232C-E55C-4D9E-9875-38D6CF35CD8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BHF.MS.MyMicroservice.Database.Tests", "tests\BHF.MS.MyMicroservice.Database.Tests\BHF.MS.MyMicroservice.Database.Tests.csproj", "{C03E232C-E55C-4D9E-9875-38D6CF35CD8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
