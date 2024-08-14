@@ -24,6 +24,8 @@ namespace BHF.MS.MyMicroservice
             AddCustomServices(builder);
             AddHttpClients(builder);
 
+            if (true) ;
+
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
 
