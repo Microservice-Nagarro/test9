@@ -42,9 +42,9 @@ namespace BHF.MS.MyMicroservice
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            app.UseSwagger();
             if (app.Environment.IsDevelopment())
             {
+                app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
