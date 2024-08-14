@@ -20,6 +20,7 @@ spec:
             app: mymicroservice-microservice
       nodeSelector:
         "kubernetes.io/os": linux
+      automountServiceAccountToken: false
       containers:
       - name: mymicroservice-microservice
         image: #{ContainerReg}#.azurecr.io/bhf.ms.mymicroservice:#{BuildRef}#
@@ -49,6 +50,7 @@ spec:
             memory: 512Mi
           limits:
             memory: 512Mi
+            ephemeral-storage: "2Gi"
       volumes:
       - name: appsettings-volume
         configMap:
