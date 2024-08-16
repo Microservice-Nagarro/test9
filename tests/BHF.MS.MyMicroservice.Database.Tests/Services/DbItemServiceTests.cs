@@ -125,5 +125,50 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Services
             // Assert
             await act.Should().ThrowAsync<Exception>();
         }
+
+        [Fact]
+        public async Task Add_ReturnsNewlyCreatedDto()
+        {
+            // Arrange
+            var createModel = new DbItemCreateDto { Name = "abc" };
+            _contextMock.SetupGet(x => x.DbItems).ReturnsDbSet([]);
+            var expectedOutput = new DbItemDto { Name = createModel.Name };
+
+            // Act
+            var result = await _sut.Add(createModel);
+
+            // Assert
+            result.Should().BeEquivalentTo(expectedOutput);
+        }
+
+        [Fact]
+        public async Task Delete_WhenItemNotFound_ReturnsFalse_StopsFurtherExecution()
+        {
+            // Arrange
+            _contextMock.SetupGet(x => x.DbItems).ReturnsDbSet([]);
+
+            // Act
+            var result = await _sut.Delete(Guid.NewGuid());
+
+            // Assert
+            result.Should().BeFalse();
+            _contextMock.Verify(x => x.DbItems.Remove(It.IsAny<DbItem>()), Times.Never);
+        }
+
+        [Fact]
+        public async Task Delete_WhenItemFound_ReturnsTrue()
+        {
+            // Arrange
+            var item = new DbItem { Id = Guid.NewGuid() };
+            _contextMock.SetupGet(x => x.DbItems).ReturnsDbSet([]);
+            _contextMock.Setup(x => x.DbItems.FindAsync(item.Id))
+                .ReturnsAsync(item);
+
+            // Act
+            var result = await _sut.Delete(item.Id);
+
+            // Assert
+            result.Should().BeTrue();
+        }
     }
 }
