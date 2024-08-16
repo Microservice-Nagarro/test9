@@ -41,9 +41,7 @@ stages:
     - job: 'Build_Microservice'
       displayName: 'Build Microservice'
       steps:
-        - checkout: self
-        - checkout: BHF.Microservices
-          displayName: 'Checkout BHF.Microservices'
+        - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
         - template: /devops/templates/build/configure-code-analysis.yml@BHF.Microservices
           parameters:
             sonarCloud:   '$(sonarCloud)'
