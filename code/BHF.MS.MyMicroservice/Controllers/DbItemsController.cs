@@ -53,7 +53,7 @@ namespace BHF.MS.MyMicroservice.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<DbItemDto>> PostDbItem(DbItemCreateDto dbItemDto)
+        public async Task<CreatedAtActionResult> PostDbItem(DbItemCreateDto dbItemDto)
         {
             var result = await dbItemService.Add(dbItemDto);
 
