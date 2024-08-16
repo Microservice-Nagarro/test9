@@ -127,6 +127,22 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Services
         }
 
         [Fact]
+        public async Task Update_WhenNoException_ShouldReturnTrue()
+        {
+            // Arrange
+            var dbItem = new DbItem { Id = Guid.NewGuid() };
+            var model = new DbItemDto(dbItem);
+            _contextMock.Setup(x => x.DbItems.FindAsync(dbItem.Id))
+                .ReturnsAsync(dbItem);
+
+            // Act
+            var result = await _sut.Update(model);
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
         public async Task Add_ReturnsNewlyCreatedDto()
         {
             // Arrange
