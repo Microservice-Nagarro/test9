@@ -35,7 +35,7 @@ namespace BHF.MS.MyMicroservice.Tests.Services
             _httpMessageHandlerMock
                 .SetupRequest(HttpMethod.Post,
                     new Uri(_httpClient.BaseAddress!, _settings.Value.Endpoint1Uri))
-                .ReturnsJsonResponse(HttpStatusCode.OK);
+                .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK), TimeSpan.FromSeconds(1));
 
             // Act
             var result = await _sut.DoSomethingAsync(model);
