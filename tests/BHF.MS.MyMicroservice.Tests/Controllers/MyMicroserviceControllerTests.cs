@@ -23,7 +23,7 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
             // Arrange
             var message = new HttpResponseMessage();
             var model = new ExampleModel { Title = "title", Email = "abc@abc.com", Phone = "123123123" };
-            _exampleServiceMock.Setup(x => x.DoSomethingAsync(model)).ReturnsAsync(message, TimeSpan.FromMicroseconds(100));
+            _exampleServiceMock.Setup(x => x.DoSomethingAsync(model)).ReturnsAsync(message, TimeSpan.FromMilliseconds(100));
 
             // Act
             await _sut.Get(model);

@@ -23,7 +23,7 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
         {
             // Arrange
             var list = new List<DbItemDto> { new() };
-            _dbItemService.Setup(x => x.GetAll()).ReturnsAsync(list, TimeSpan.FromMicroseconds(100));
+            _dbItemService.Setup(x => x.GetAll()).ReturnsAsync(list, TimeSpan.FromMilliseconds(100));
 
             // Act
             var result = (OkObjectResult)await _sut.GetDbItems();
@@ -51,7 +51,7 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
         {
             // Arrange
             var item = new DbItemDto { Id = Guid.NewGuid() };
-            _dbItemService.Setup(x => x.GetById(item.Id)).ReturnsAsync(item, TimeSpan.FromMicroseconds(100));
+            _dbItemService.Setup(x => x.GetById(item.Id)).ReturnsAsync(item, TimeSpan.FromMilliseconds(100));
 
             // Act
             var result = await _sut.GetDbItem(item.Id);
@@ -91,7 +91,7 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
         {
             // Arrange
             var model = new DbItemDto { Id = Guid.NewGuid() };
-            _dbItemService.Setup(x => x.Update(model)).ReturnsAsync(true, TimeSpan.FromMicroseconds(100));
+            _dbItemService.Setup(x => x.Update(model)).ReturnsAsync(true, TimeSpan.FromMilliseconds(100));
 
             // Act
             var result = await _sut.PutDbItem(model.Id, model);
@@ -106,7 +106,7 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
             // Arrange
             var model = new DbItemCreateDto();
             var output = new DbItemDto { Id = Guid.NewGuid() };
-            _dbItemService.Setup(x => x.Add(model)).ReturnsAsync(output, TimeSpan.FromMicroseconds(100));
+            _dbItemService.Setup(x => x.Add(model)).ReturnsAsync(output, TimeSpan.FromMilliseconds(100));
 
             // Act
             var result = await _sut.PostDbItem(model);
@@ -135,7 +135,7 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
         {
             // Arrange
             var id = Guid.NewGuid();
-            _dbItemService.Setup(x => x.Delete(id)).ReturnsAsync(true, TimeSpan.FromMicroseconds(100));
+            _dbItemService.Setup(x => x.Delete(id)).ReturnsAsync(true, TimeSpan.FromMilliseconds(100));
 
             // Act
             var result = await _sut.DeleteDbItem(id);
