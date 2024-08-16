@@ -89,6 +89,8 @@ dotnet_style_qualification_for_method = false:silent
 dotnet_style_qualification_for_property = false:silent
 dotnet_style_qualification_for_field = false:silent
 dotnet_diagnostic.CA1848.severity = silent
+dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion
+dotnet_diagnostic.CA1707.severity = none
 
 [*.cs]
 csharp_indent_labels = flush_left
