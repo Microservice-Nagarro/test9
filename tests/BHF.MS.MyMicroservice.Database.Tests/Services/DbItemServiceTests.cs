@@ -97,7 +97,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Services
             var model = new DbItemDto(dbItem);
 
             _contextMock.SetupGet(x => x.DbItems).ReturnsDbSet(itemFound ? [dbItem] : []);
-            _contextMock.Setup(x => x.DbItems.FindAsync(dbItem.Id))
+            _contextMock.Setup(x => x.DbItems.FindAsync(It.Is<object[]>(y => y.Contains(dbItem.Id)), default))
                 .ReturnsAsync(dbItem);
 
             _contextMock.Setup(x => x.SaveChangesAsync(default)).Throws<DbUpdateConcurrencyException>();
@@ -115,7 +115,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Services
             // Arrange
             var dbItem = new DbItem { Id = Guid.NewGuid() };
             var model = new DbItemDto(dbItem);
-            _contextMock.Setup(x => x.DbItems.FindAsync(dbItem.Id))
+            _contextMock.Setup(x => x.DbItems.FindAsync(It.Is<object[]>(y => y.Contains(dbItem.Id)), default))
                 .ReturnsAsync(dbItem);
             _contextMock.Setup(x => x.SaveChangesAsync(default)).Throws<Exception>();
 
@@ -132,7 +132,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Services
             // Arrange
             var dbItem = new DbItem { Id = Guid.NewGuid() };
             var model = new DbItemDto(dbItem) { Name = "abc" };
-            _contextMock.Setup(x => x.DbItems.FindAsync(dbItem.Id))
+            _contextMock.Setup(x => x.DbItems.FindAsync(It.Is<object[]>(y => y.Contains(dbItem.Id)), default))
                 .ReturnsAsync(dbItem);
 
             // Act
@@ -178,7 +178,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Services
             // Arrange
             var item = new DbItem { Id = Guid.NewGuid() };
             _contextMock.SetupGet(x => x.DbItems).ReturnsDbSet([]);
-            _contextMock.Setup(x => x.DbItems.FindAsync(item.Id))
+            _contextMock.Setup(x => x.DbItems.FindAsync(It.Is<object[]>(y => y.Contains(item.Id)), default))
                 .ReturnsAsync(item);
 
             // Act
