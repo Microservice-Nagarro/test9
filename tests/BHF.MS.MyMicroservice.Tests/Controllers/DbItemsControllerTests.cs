@@ -122,7 +122,6 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
         {
             // Arrange
             var id = Guid.NewGuid();
-            _dbItemService.Setup(x => x.Delete(id)).ReturnsAsync(false);
 
             // Act
             var result = await _sut.DeleteDbItem(id);

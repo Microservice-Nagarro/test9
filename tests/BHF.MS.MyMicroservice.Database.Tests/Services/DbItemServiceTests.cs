@@ -131,7 +131,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Services
         {
             // Arrange
             var dbItem = new DbItem { Id = Guid.NewGuid() };
-            var model = new DbItemDto(dbItem);
+            var model = new DbItemDto(dbItem) { Name = "abc" };
             _contextMock.Setup(x => x.DbItems.FindAsync(dbItem.Id))
                 .ReturnsAsync(dbItem);
 
@@ -140,6 +140,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Services
 
             // Assert
             result.Should().BeTrue();
+            dbItem.Name.Should().Be(model.Name);
         }
 
         [Fact]
