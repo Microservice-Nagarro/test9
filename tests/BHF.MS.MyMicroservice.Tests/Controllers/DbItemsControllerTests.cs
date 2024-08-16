@@ -143,5 +143,19 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
             // Assert
             result.Should().BeOfType<NoContentResult>();
         }
+
+        [Fact]
+        public async Task DeleteDbItem_WhenDeleteThrowsException_ExceptionIsNotCatched()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+            _dbItemService.Setup(x => x.Delete(id)).Throws<Exception>();
+
+            // Act
+            var act = async () => await _sut.DeleteDbItem(id);
+
+            // Assert
+            await act.Should().ThrowAsync<Exception>();
+        }
     }
 }
