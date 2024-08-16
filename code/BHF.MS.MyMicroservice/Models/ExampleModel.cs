@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 
 namespace BHF.MS.MyMicroservice.Models
 {
     [ExcludeFromCodeCoverage]
     public class ExampleModel
     {
+        [JsonRequired]
         public int Id { get; set; }
 
         [Required]

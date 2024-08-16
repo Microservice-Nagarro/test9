@@ -11,7 +11,6 @@ namespace BHF.MS.MyMicroservice.Database.Tests.HealthCheck
 {
     public sealed class DbHealthCheckTests
     {
-        private readonly CancellationToken _cancellationToken = new();
         private readonly DbHealthCheck _sut;
         private readonly Mock<CustomDbContext> _contextMock = new();
         private readonly Mock<DatabaseFacade> _dbFacadeMock;
@@ -31,13 +30,13 @@ namespace BHF.MS.MyMicroservice.Database.Tests.HealthCheck
         public async Task CheckHealthAsync_WhenSuccess_ReturnsHealthyResult_ShouldCallCanConnectOnce()
         {
             // Arrange
-            _dbFacadeMock.Setup(x => x.CanConnectAsync(_cancellationToken)).ReturnsAsync(true);
+            _dbFacadeMock.Setup(x => x.CanConnectAsync(default)).ReturnsAsync(true);
 
             // Act
-            var result = await _sut.CheckHealthAsync(new HealthCheckContext(), _cancellationToken);
+            var result = await _sut.CheckHealthAsync(new HealthCheckContext());
 
             // Assert
-            _dbFacadeMock.Verify(x => x.CanConnectAsync(_cancellationToken), Times.Once);
+            _dbFacadeMock.Verify(x => x.CanConnectAsync(default), Times.Once);
             result.Should().NotBeNull();
             result.Status.Should().Be(HealthStatus.Healthy);
         }
@@ -46,13 +45,27 @@ namespace BHF.MS.MyMicroservice.Database.Tests.HealthCheck
         public async Task CheckHealthAsync_WhenFailure_ReturnsUnhealthyResult_ShouldCallCanConnectTwice()
         {
             // Arrange
-            _dbFacadeMock.Setup(x => x.CanConnectAsync(_cancellationToken)).ReturnsAsync(false);
+            _dbFacadeMock.Setup(x => x.CanConnectAsync(default)).ReturnsAsync(false);
 
             // Act
-            var result = await _sut.CheckHealthAsync(new HealthCheckContext(), _cancellationToken);
+            var result = await _sut.CheckHealthAsync(new HealthCheckContext());
 
             // Assert
-            _dbFacadeMock.Verify(x => x.CanConnectAsync(_cancellationToken), Times.Exactly(2));
+            _dbFacadeMock.Verify(x => x.CanConnectAsync(default), Times.Exactly(2));
+            result.Should().NotBeNull();
+            result.Status.Should().Be(HealthStatus.Unhealthy);
+        }
+
+        [Fact]
+        public async Task CheckHealthAsync_WhenAttemptsCountEquals0_ReturnsUnhealthyResult()
+        {
+            // Assert
+            _settings.Value.AttemptsCount = 0;
+
+            // Act
+            var result = await _sut.CheckHealthAsync(new HealthCheckContext());
+
+            // Assert
             result.Should().NotBeNull();
             result.Status.Should().Be(HealthStatus.Unhealthy);
         }
