@@ -145,7 +145,7 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
         }
 
         [Fact]
-        public async Task DeleteDbItem_WhenDeleteThrowsException_ExceptionIsNotCatch()
+        public async Task DeleteDbItem_WhenDeleteThrowsException_ExceptionThrown()
         {
             // Arrange
             var id = Guid.NewGuid();
