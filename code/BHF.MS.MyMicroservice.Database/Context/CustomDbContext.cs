@@ -4,7 +4,7 @@ using BHF.MS.MyMicroservice.Database.Context.Entities;
 
 namespace BHF.MS.MyMicroservice.Database.Context
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage(Justification = "It's EF context implementation")]
     public class CustomDbContext(DbContextOptions<CustomDbContext> options) : DbContext(options)
     {
         protected CustomDbContext() : this(new DbContextOptions<CustomDbContext>())

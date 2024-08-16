@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace BHF.MS.MyMicroservice.Models
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage(Justification = "It's a model with no logic")]
     public class ExampleModel
     {
         [JsonRequired]

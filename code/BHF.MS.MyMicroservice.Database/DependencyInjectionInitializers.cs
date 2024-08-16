@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BHF.MS.MyMicroservice.Database
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage(Justification = "It's an IoC initializer")]
     public static class DependencyInjectionInitializers
     {
         public static void AddDatabases(IServiceCollection serviceCollection)

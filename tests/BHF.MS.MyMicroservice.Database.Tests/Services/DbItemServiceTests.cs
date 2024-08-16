@@ -33,6 +33,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Services
                     Name = i.ToString(CultureInfo.InvariantCulture)
                 });
             }
+
             _contextMock.SetupGet(x => x.DbItems).ReturnsDbSet(entityList);
 
             // Act

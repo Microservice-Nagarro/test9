@@ -9,7 +9,7 @@ using BHF.MS.MyMicroservice.Database.Models.HealthCheck;
 
 namespace BHF.MS.MyMicroservice
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage(Justification = "It's an IoC initializer")]
     public static class DependencyInjectionInitializers
     {
         public static void AddOptionsConfiguration(WebApplicationBuilder builder)

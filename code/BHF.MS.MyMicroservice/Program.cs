@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BHF.MS.MyMicroservice
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage(Justification = "It's a main Program class")]
     internal static class Program
     {
         public static async Task Main(string[] args)

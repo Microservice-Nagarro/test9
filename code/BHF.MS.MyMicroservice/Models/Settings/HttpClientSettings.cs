@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace BHF.MS.MyMicroservice.Models.Settings
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage(Justification = "It's a model with no logic")]
     public class HttpClientSettings
     {
         [Url]

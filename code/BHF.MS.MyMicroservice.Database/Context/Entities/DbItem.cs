@@ -4,7 +4,7 @@ using BHF.MS.MyMicroservice.Database.Models.DbItem;
 
 namespace BHF.MS.MyMicroservice.Database.Context.Entities
 {
-    [ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage(Justification = "It's EF entity")]
     public class DbItem
     {
         public Guid Id { get; set; }
