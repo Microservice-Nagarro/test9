@@ -21,7 +21,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.Models.DbItem
             };
 
             // Act
-            var sut = new DbItemCreateDto(dbItem);
+            var sut = new DbItemDto(dbItem);
 
             // Assert
             sut.Should().BeEquivalentTo(expectedResult);
