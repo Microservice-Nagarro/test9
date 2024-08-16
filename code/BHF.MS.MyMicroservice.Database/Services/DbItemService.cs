@@ -7,22 +7,22 @@ namespace BHF.MS.MyMicroservice.Database.Services
 {
     public class DbItemService(CustomDbContext context) : IDbItemService
     {
-        public async Task<IList<DbItemDto>> GetAll(CancellationToken token = default)
+        public async Task<IList<DbItemDto>> GetAll()
         {
             return await context.DbItems
                 .OrderByDescending(x => x.LastUpdated)
                 .Take(100)
-                .Select(x => new DbItemDto(x)).ToListAsync(token);
+                .Select(x => new DbItemDto(x)).ToListAsync();
         }
 
-        public async Task<DbItemDto?> GetById(Guid id, CancellationToken token = default)
+        public async Task<DbItemDto?> GetById(Guid id)
         {
-            return await context.DbItems.Where(x => x.Id == id).Select(x => new DbItemDto(x)).FirstOrDefaultAsync(token);
+            return await context.DbItems.Where(x => x.Id == id).Select(x => new DbItemDto(x)).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> Update(DbItemDto model, CancellationToken token = default)
+        public async Task<bool> Update(DbItemDto model)
         {
-            var dbItem = await context.DbItems.FindAsync([model.Id], token);
+            var dbItem = await context.DbItems.FindAsync(model.Id);
             if (dbItem == null)
             {
                 return false;
@@ -32,11 +32,11 @@ namespace BHF.MS.MyMicroservice.Database.Services
 
             try
             {
-                await context.SaveChangesAsync(token);
+                await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await DbItemExists(model.Id, token))
+                if (!await DbItemExists(model.Id))
                 {
                     return false;
                 }
@@ -45,33 +45,33 @@ namespace BHF.MS.MyMicroservice.Database.Services
             return true;
         }
 
-        public async Task<DbItemDto> Add(DbItemCreateDto model, CancellationToken token = default)
+        public async Task<DbItemDto> Add(DbItemCreateDto model)
         {
             var dbItem = new DbItem { Name = model.Name };
 
             context.DbItems.Add(dbItem);
-            await context.SaveChangesAsync(token);
+            await context.SaveChangesAsync();
 
             return new DbItemDto(dbItem);
         }
 
-        public async Task<bool> Delete(Guid id, CancellationToken token = default)
+        public async Task<bool> Delete(Guid id)
         {
-            var dbItem = await context.DbItems.FindAsync([id], token);
+            var dbItem = await context.DbItems.FindAsync(id);
             if (dbItem == null)
             {
                 return false;
             }
 
             context.DbItems.Remove(dbItem);
-            await context.SaveChangesAsync(token);
+            await context.SaveChangesAsync();
 
             return true;
         }
 
-        private async Task<bool> DbItemExists(Guid id, CancellationToken token = default)
+        private async Task<bool> DbItemExists(Guid id)
         {
-            return await context.DbItems.AnyAsync(x => x.Id == id, token);
+            return await context.DbItems.AnyAsync(x => x.Id == id);
         }
     }
 }
