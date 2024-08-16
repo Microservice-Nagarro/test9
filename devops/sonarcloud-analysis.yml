@@ -51,6 +51,8 @@ stages:
             publish:                     'N'
             buildContext:                $(Build.Repository.LocalPath)/$(repository)
         - template: /devops/templates/build/run-unit-tests.yml@BHF.Microservices
+          parameters:
+            testSettingsPath: '$(repository)/CodeCoverage.runsettings'
         - template: /devops/templates/build/run-owasp-dependency-check.yml@BHF.Microservices
           parameters:
             azureSubscription: $(azureSubscription)
