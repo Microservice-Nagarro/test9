@@ -1,6 +1,8 @@
 using BHF.MS.MyMicroservice.Controllers;
 using BHF.MS.MyMicroservice.Models;
 using BHF.MS.MyMicroservice.Services;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 
@@ -26,10 +28,11 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
             _exampleServiceMock.Setup(x => x.DoSomethingAsync(model)).ReturnsAsync(message);
 
             // Act
-            await _sut.Get(model);
+            var result = await _sut.Get(model);
 
             // Assert
             _loggerMock.VerifyLog(x => x.LogWarning("Responses {Response} are invalid!", message), Times.Once);
+            result.Should().BeOfType<OkResult>();
         }
     }
 }

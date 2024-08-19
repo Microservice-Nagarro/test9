@@ -13,6 +13,7 @@ namespace BHF.MS.MyMicroservice
             DependencyInjectionInitializers.AddOptionsConfiguration(builder);
             DependencyInjectionInitializers.AddCustomServices(builder.Services);
 
+            builder.Services.AddResponseCaching();
             builder.Services.AddControllers();
             builder.Services.AddSwaggerGen();
 
@@ -30,6 +31,9 @@ namespace BHF.MS.MyMicroservice
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
+
+            app.UseResponseCaching();
+
             app.MapControllers();
             DependencyInjectionInitializers.MapHealthChecks(app);
 
