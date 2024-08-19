@@ -30,7 +30,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.HealthCheck
         public async Task CheckHealthAsync_WhenSuccess_ReturnsHealthyResult_ShouldCallCanConnectOnce()
         {
             // Arrange
-            _dbFacadeMock.Setup(x => x.CanConnectAsync(default)).ReturnsAsync(true, TimeSpan.FromMilliseconds(100));
+            _dbFacadeMock.Setup(x => x.CanConnectAsync(default)).ReturnsAsync(true);
 
             // Act
             var result = await _sut.CheckHealthAsync(new HealthCheckContext());
@@ -45,7 +45,7 @@ namespace BHF.MS.MyMicroservice.Database.Tests.HealthCheck
         public async Task CheckHealthAsync_WhenFailure_ReturnsUnhealthyResult_ShouldCallCanConnectTwice()
         {
             // Arrange
-            _dbFacadeMock.Setup(x => x.CanConnectAsync(default)).ReturnsAsync(false, TimeSpan.FromMilliseconds(100));
+            _dbFacadeMock.Setup(x => x.CanConnectAsync(default)).ReturnsAsync(false);
 
             // Act
             var result = await _sut.CheckHealthAsync(new HealthCheckContext());
