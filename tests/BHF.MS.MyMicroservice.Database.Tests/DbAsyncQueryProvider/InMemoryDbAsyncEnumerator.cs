@@ -15,7 +15,8 @@
 
         public ValueTask<bool> MoveNextAsync()
         {
-            return new ValueTask<bool>(Task.Delay(AsyncDbDelayConst.Delay).ContinueWith(t => enumerator.MoveNext()));
+            return new ValueTask<bool>(Task.FromResult(enumerator.MoveNext()));
+            //return new ValueTask<bool>(Task.Delay(AsyncDbDelayConst.Delay).ContinueWith(t => enumerator.MoveNext()));
         }
         public T Current => enumerator.Current;
     }
