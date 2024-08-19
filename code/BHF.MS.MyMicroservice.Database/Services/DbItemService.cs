@@ -2,11 +2,9 @@
 using BHF.MS.MyMicroservice.Database.Context.Entities;
 using BHF.MS.MyMicroservice.Database.Models.DbItem;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
 
 namespace BHF.MS.MyMicroservice.Database.Services
 {
-    [ExcludeFromCodeCoverage(Justification = "There is no way to inject delay to DbSet mocks to make async state machine work as expected and calculate proper coverage results for any code calling await")]
     public class DbItemService(CustomDbContext context) : IDbItemService
     {
         public async Task<IList<DbItemDto>> GetAll()

@@ -3,10 +3,10 @@ using BHF.MS.MyMicroservice.Database.Context;
 using BHF.MS.MyMicroservice.Database.Context.Entities;
 using BHF.MS.MyMicroservice.Database.Models.DbItem;
 using BHF.MS.MyMicroservice.Database.Services;
+using BHF.MS.MyMicroservice.Database.Tests.DbAsyncQueryProvider;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Moq.EntityFrameworkCore;
 
 namespace BHF.MS.MyMicroservice.Database.Tests.Services
 {
