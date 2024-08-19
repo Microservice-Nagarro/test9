@@ -69,20 +69,6 @@ namespace BHF.MS.MyMicroservice.Database.Services
             return true;
         }
 
-        public async Task<bool> DeleteTemp(Guid id)
-        {
-            var dbItem = await context.DbItems.FindAsync(id);
-            if (dbItem == null)
-            {
-                return false;
-            }
-
-            context.DbItems.Remove(dbItem);
-            await context.SaveChangesAsync();
-
-            return true;
-        }
-
         private async Task<bool> DbItemExists(Guid id)
         {
             return await context.DbItems.AnyAsync(x => x.Id == id);
