@@ -2,6 +2,6 @@
 {
     internal static class AsyncDbDelayConst
     {
-        public static readonly TimeSpan Delay = TimeSpan.FromMilliseconds(50);
+        public static readonly TimeSpan Delay = TimeSpan.FromMilliseconds(100);
     }
 }
