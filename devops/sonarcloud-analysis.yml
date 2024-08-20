@@ -35,12 +35,8 @@ stages:
       displayName: 'Build Microservice'
       steps:
         - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
-        - template: /devops/templates/build/configure-code-analysis.yml@BHF.Microservices
           parameters:
-            sonarCloud:   '$(sonarCloud)'
-            organization: '$(organization)'
-            projectKey:   '$(projectKey)'
-            projectName:  '$(projectName)'
+            forceShallowFetch: true
         - template: /devops/templates/build/build-microservice.yml@BHF.Microservices
           parameters:
             containerRegistryConnection: '$(containerRegistryConnection)'
@@ -48,6 +44,17 @@ stages:
             dockerPath:                  '$(dockerPath)'
             publish:                     'N'
             buildContext:                $(Build.Repository.LocalPath)/$(repository)
+
+    - job: 'Analyse_Code'
+      displayName: 'Analyse Code'
+      steps:
+        - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
+        - template: /devops/templates/build/configure-code-analysis.yml@BHF.Microservices
+          parameters:
+            sonarCloud:   '$(sonarCloud)'
+            organization: '$(organization)'
+            projectKey:   '$(projectKey)'
+            projectName:  '$(projectName)'
         - template: /devops/templates/build/run-unit-tests.yml@BHF.Microservices
           parameters:
             testSettingsPath: '$(repository)/CodeCoverage.runsettings'
