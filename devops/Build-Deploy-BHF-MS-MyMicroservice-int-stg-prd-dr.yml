@@ -44,9 +44,9 @@ variables:
 - name: containerRegistryConnection
   value: 'BHF Container Registry Connection'
 - name: repository
-  value: 'BHF.MS.MyMicroservice' # Change me
+  value: 'BHF.MS.Template' # Change me - repository name
 - name: dockerPath
-  value: 'BHF.MS.MyMicroservice' #
+  value: 'code/BHF.MS.MyMicroservice' # Change me - relative path to the folder containing Dockerfile
 
 stages:
   - stage: 'Build_and_Publish_Microservice'
@@ -55,15 +55,16 @@ stages:
     - job: 'Build_Microservice'
       displayName: 'Build Microservice'
       steps:
-        - checkout: self
-        - checkout: BHF.Microservices
-          displayName: 'Checkout BHF.Microservices'
+        - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
+          parameters:
+            forceShallowFetch: true
         - template: /devops/templates/build/build-microservice.yml@BHF.Microservices
           parameters:
             containerRegistryConnection: '$(containerRegistryConnection)'
             repository:                  '$(repository)'
             dockerPath:                  '$(dockerPath)'
             publish:                     'Y'
+            buildContext:                $(Build.Repository.LocalPath)/$(repository)
             
   - stage: Deploy_To_Integration
     displayName: 'Deploy to Integration'
@@ -78,16 +79,16 @@ stages:
           - name:  BuildRef
             value: '$(build.buildnumber)'          
           - name:  KeyVaultUri
-            value: 'https://uks-int-ms-micro-kv.vault.azure.net/' #
+            value: 'https://uks-int-ms-micro-kv.vault.azure.net/' # Change me - Integration microservice KV instance
           - name:  ManagedIdentityClientId
             value: '5f8f13d5-ae74-4f73-87ea-37d42e04a8ef'
         strategy:
           runOnce:
             deploy:
               steps:
-              - checkout: self
-              - checkout: BHF.Microservices
-                displayName: 'Checkout BHF.Microservices'
+              - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
+                parameters:
+                  forceShallowFetch: true
               - template: /devops/templates/deploy/deploy-kubernetes.yml@BHF.Microservices
                 parameters:
                   azureSubscription:  $(devAzureSubscription)
@@ -109,16 +110,16 @@ stages:
           - name:  BuildRef
             value: '$(build.buildnumber)'
           - name:  KeyVaultUri
-            value: 'https://uks-stg-ms-micro-kv.vault.azure.net/' #
+            value: 'https://uks-stg-ms-micro-kv.vault.azure.net/' # Change me - Staging microservice KV instance
           - name:  ManagedIdentityClientId
             value: '187f65d5-d6ea-4b23-a592-13d99c55a7d5'
         strategy:
           runOnce:
             deploy:
               steps:
-              - checkout: self
-              - checkout: BHF.Microservices
-                displayName: 'Checkout BHF.Microservices'
+              - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
+                parameters:
+                  forceShallowFetch: true
               - template: /devops/templates/deploy/deploy-kubernetes.yml@BHF.Microservices
                 parameters:
                   azureSubscription:  $(stgAzureSubscription)
@@ -139,16 +140,16 @@ stages:
           - name:  BuildRef
             value: '$(build.buildnumber)'
           - name:  KeyVaultUri
-            value: 'https://uks-prd-ms-micro-kv.vault.azure.net/' #
+            value: 'https://uks-prd-ms-micro-kv.vault.azure.net/'  # Change me - Production microservice KV instance
           - name:  ManagedIdentityClientId
             value: '8fa2d8a8-311b-4cd4-8d0b-c21f5e423baa'
         strategy:
           runOnce:
             deploy:
               steps:
-              - checkout: self
-              - checkout: BHF.Microservices
-                displayName: 'Checkout BHF.Microservices'
+              - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
+                parameters:
+                  forceShallowFetch: true
               - template: /devops/templates/deploy/deploy-kubernetes.yml@BHF.Microservices
                 parameters:
                   azureSubscription:  $(prdAzureSubscription)
@@ -169,16 +170,16 @@ stages:
           - name:  BuildRef
             value: '$(build.buildnumber)'
           - name:  KeyVaultUri
-            value: 'https://ukw-dr-ms-micro-kv.vault.azure.net/' #
+            value: 'https://ukw-dr-ms-micro-kv.vault.azure.net/'  # Change me - DR microservice KV instance
           - name:  ManagedIdentityClientId
             value: 'ddc80c48-3e9a-46b8-8871-70e62c9f19cc'
         strategy:
           runOnce:
             deploy:
               steps:
-              - checkout: self
-              - checkout: BHF.Microservices
-                displayName: 'Checkout BHF.Microservices'
+              - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
+                parameters:
+                  forceShallowFetch: true
               - template: /devops/templates/deploy/deploy-kubernetes.yml@BHF.Microservices
                 parameters:
                   azureSubscription:  $(prdAzureSubscription)

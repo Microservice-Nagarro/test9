@@ -1,0 +1,6 @@
+<!-- Copy the example file and remove "example" extension -->
+<!-- With that file you can overwrite build settings on your local environment -->
+<Project>
+	<PropertyGroup>
+	</PropertyGroup>
+</Project>

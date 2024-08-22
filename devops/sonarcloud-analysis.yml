@@ -1,4 +1,3 @@
-#name: 'SonarCloud Build & Analysis'
 pr: none
 trigger: none
 
@@ -16,17 +15,17 @@ variables:
 - name: containerRegistryConnection
   value: 'BHF-ACR Connection'
 - name: repository
-  value: 'BHF.MS.MyMicroservice' # Change me
+  value: 'BHF.MS.Template' # Change me
 - name: dockerPath
-  value: 'BHF.MS.MyMicroservice' #
+  value: 'code/BHF.MS.MyMicroservice' # Change me - relative path to the folder containing Dockerfile
 - name: sonarCloud
   value: 'SonarCloud BHF.Website'
 - name: organization
   value: 'bhf-digital'
 - name: projectKey
-  value: 'BHFDigital_BHF.MS.MyMicroservice' #
+  value: 'BHFDigital_BHF.MS.Template' # Change me - SonarCloud project key
 - name: projectName
-  value: 'BHF.MS.MyMicroservice' #
+  value: 'BHF.MS.Template' # Change me - SonarCloud project name
 
 stages:
   - stage: 'Build_and_Publish_Microservice'
@@ -35,22 +34,30 @@ stages:
     - job: 'Build_Microservice'
       displayName: 'Build Microservice'
       steps:
-        - checkout: self
-        - checkout: BHF.Microservices
-          displayName: 'Checkout BHF.Microservices'
-        - template: /devops/templates/build/configure-code-analysis.yml@BHF.Microservices
+        - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
           parameters:
-            sonarCloud:   '$(sonarCloud)'
-            organization: '$(organization)'
-            projectKey:   '$(projectKey)'
-            projectName:  '$(projectName)'
+            forceShallowFetch: true
         - template: /devops/templates/build/build-microservice.yml@BHF.Microservices
           parameters:
             containerRegistryConnection: '$(containerRegistryConnection)'
             repository:                  '$(repository)'
             dockerPath:                  '$(dockerPath)'
             publish:                     'N'
+            buildContext:                $(Build.Repository.LocalPath)/$(repository)
+
+    - job: 'Analyse_Code'
+      displayName: 'Analyse Code'
+      steps:
+        - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
+        - template: /devops/templates/build/configure-code-analysis.yml@BHF.Microservices
+          parameters:
+            sonarCloud:   '$(sonarCloud)'
+            organization: '$(organization)'
+            projectKey:   '$(projectKey)'
+            projectName:  '$(projectName)'
         - template: /devops/templates/build/run-unit-tests.yml@BHF.Microservices
+          parameters:
+            testSettingsPath: '$(repository)/CodeCoverage.runsettings'
         - template: /devops/templates/build/run-owasp-dependency-check.yml@BHF.Microservices
           parameters:
             azureSubscription: $(azureSubscription)

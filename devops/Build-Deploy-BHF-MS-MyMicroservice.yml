@@ -23,9 +23,9 @@ variables:
 - name: containerRegistryConnection
   value: 'BHF-ACR Connection'
 - name: repository
-  value: 'BHF.MS.MyMicroservice' # Change me
+  value: 'BHF.MS.Template' # Change me - repository name
 - name: dockerPath
-  value: 'BHF.MS.MyMicroservice' #
+  value: 'code/BHF.MS.MyMicroservice' # Change me - relative path to the folder containing Dockerfile
 
 stages:
   - stage: 'Build_and_Publish_Microservice'
@@ -34,15 +34,16 @@ stages:
     - job: 'Build_Microservice'
       displayName: 'Build Microservice'
       steps:
-        - checkout: self
-        - checkout: BHF.Microservices
-          displayName: 'Checkout BHF.Microservices'
+        - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
+          parameters:
+            forceShallowFetch: true
         - template: /devops/templates/build/build-microservice.yml@BHF.Microservices
           parameters:
             containerRegistryConnection: '$(containerRegistryConnection)'
             repository:                  '$(repository)'
             dockerPath:                  '$(dockerPath)'
             publish:                     'Y'
+            buildContext:                $(Build.Repository.LocalPath)/$(repository)
             
   - stage: Deploy_To_Development
     displayName: 'Deploy to Development'
@@ -57,16 +58,16 @@ stages:
           - name:  BuildRef
             value: '$(build.buildnumber)'
           - name:  KeyVaultUri
-            value: 'https://uks-ms-micro-kv.vault.azure.net/' #
+            value: 'https://<keyvault_uri>.vault.azure.net/' # Change me - Integration microservice KV instance
           - name:  ManagedIdentityClientId
             value: '6369b0bb-7e77-430b-b32d-d598915e252a'
         strategy:
           runOnce:
             deploy:
               steps:
-              - checkout: self
-              - checkout: BHF.Microservices
-                displayName: 'Checkout BHF.Microservices'
+              - template: /devops/templates/build/configure-checkout.yml@BHF.Microservices
+                parameters:
+                  forceShallowFetch: true
               - template: /devops/templates/deploy/deploy-kubernetes.yml@BHF.Microservices
                 parameters:
                   azureSubscription:  $(azureSubscription)
