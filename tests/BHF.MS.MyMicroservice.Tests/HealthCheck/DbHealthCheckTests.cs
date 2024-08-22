@@ -1,4 +1,3 @@
-using System.Net;
 using BHF.MS.MyMicroservice.HealthCheck;
 using BHF.MS.MyMicroservice.Models;
 using BHF.MS.MyMicroservice.Models.Settings;
@@ -8,6 +7,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
+using System.Net;
 
 namespace BHF.MS.MyMicroservice.Tests.HealthCheck
 {

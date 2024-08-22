@@ -1,11 +1,11 @@
 using BHF.MS.MyMicroservice.Models;
 using BHF.MS.MyMicroservice.Models.Settings;
 using BHF.MS.MyMicroservice.Services;
+using FluentAssertions;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Contrib.HttpClient;
 using System.Net;
-using FluentAssertions;
 
 namespace BHF.MS.MyMicroservice.Tests.Services
 {
