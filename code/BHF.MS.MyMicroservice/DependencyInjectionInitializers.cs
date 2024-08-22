@@ -4,8 +4,7 @@ using BHF.MS.MyMicroservice.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using System.Diagnostics.CodeAnalysis;
-using BHF.MS.MyMicroservice.Database.HealthCheck;
-using BHF.MS.MyMicroservice.Database.Models.HealthCheck;
+using BHF.MS.MyMicroservice.HealthCheck;
 
 namespace BHF.MS.MyMicroservice
 {
@@ -30,7 +29,7 @@ namespace BHF.MS.MyMicroservice
             Database.DependencyInjectionInitializers.AddDatabases(serviceCollection);
             Database.DependencyInjectionInitializers.AddCustomServices(serviceCollection);
 
-            serviceCollection.AddTransient<DbHealthCheck>();
+            serviceCollection.AddTransient<ExampleServiceHealthCheck>();
             serviceCollection.AddTransient<IExampleService, ExampleService>();
 
             AddHttpClients(serviceCollection);

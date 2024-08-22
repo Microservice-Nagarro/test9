@@ -12,7 +12,7 @@ namespace BHF.MS.MyMicroservice.Tests.Services
     public class ExampleServiceTests
     {
         private readonly HttpClient _httpClient;
-        private readonly Mock<HttpMessageHandler> _httpMessageHandlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+        private readonly Mock<HttpMessageHandler> _httpMessageHandlerMock = new(MockBehavior.Strict);
         private readonly IOptions<ServiceSettings> _settings = Options.Create(new ServiceSettings
         {
             Endpoint1Uri = "/abc"
