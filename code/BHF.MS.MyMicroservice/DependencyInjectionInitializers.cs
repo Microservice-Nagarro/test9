@@ -25,6 +25,14 @@ namespace BHF.MS.MyMicroservice
                 .ValidateOnStart();
         }
 
+        public static void AddHealthCheckConfiguration(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddHealthChecks()
+                .AddCheck<ExampleServiceHealthCheck>(
+                    name: $"{nameof(ExampleServiceHealthCheck)} health check",
+                    tags: ["ready"]);
+        }
+
         public static void AddCustomServices(IServiceCollection serviceCollection)
         {
             Database.DependencyInjectionInitializers.AddDatabases(serviceCollection);

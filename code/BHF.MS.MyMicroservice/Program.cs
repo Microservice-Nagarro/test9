@@ -19,6 +19,7 @@ namespace BHF.MS.MyMicroservice
 
             DependencyInjectionInitializers.AddApplicationInsights(builder);
             Database.DependencyInjectionInitializers.AddHealthCheckConfiguration(builder.Services);
+            DependencyInjectionInitializers.AddHealthCheckConfiguration(builder.Services);
 
             var app = builder.Build();
 
