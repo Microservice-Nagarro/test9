@@ -24,11 +24,26 @@ namespace BHF.MS.MyMicroservice.Tests.Controllers
         {
             // Arrange
             var message = new HttpResponseMessage();
-            var model = new ExampleModel { Title = "title", Email = "abc@abc.com", Phone = "123123123" };
-            _exampleServiceMock.Setup(x => x.DoSomethingAsync(model)).ReturnsAsync(message);
+            _exampleServiceMock.Setup(x => x.GetSomething()).ReturnsAsync(message);
 
             // Act
-            var result = await _sut.Get(model);
+            var result = await _sut.Get();
+
+            // Assert
+            _loggerMock.VerifyLog(x => x.LogWarning("Responses {Response} are invalid!", message), Times.Once);
+            result.Should().BeOfType<OkResult>();
+        }
+
+        [Fact]
+        public async Task Post_LogsWarning()
+        {
+            // Arrange
+            var message = new HttpResponseMessage();
+            var model = new ExampleModel { Title = "title", Email = "abc@abc.com", Phone = "123123123" };
+            _exampleServiceMock.Setup(x => x.PostSomething(model)).ReturnsAsync(message);
+
+            // Act
+            var result = await _sut.Post(model);
 
             // Assert
             _loggerMock.VerifyLog(x => x.LogWarning("Responses {Response} are invalid!", message), Times.Once);

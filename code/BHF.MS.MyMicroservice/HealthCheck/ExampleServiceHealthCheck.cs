@@ -1,5 +1,4 @@
-﻿using BHF.MS.MyMicroservice.Models;
-using BHF.MS.MyMicroservice.Models.Settings;
+﻿using BHF.MS.MyMicroservice.Models.Settings;
 using BHF.MS.MyMicroservice.Services;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
@@ -10,16 +9,9 @@ namespace BHF.MS.MyMicroservice.HealthCheck
     {
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            var model = new ExampleModel
-            {
-                Email = "test@test.com",
-                Title = "title",
-                Phone = "123123123"
-            };
-
             for (byte i = 0; i < settings.Value.AttemptsCount; i++)
             {
-                var result = await exampleService.DoSomethingAsync(model);
+                var result = await exampleService.GetSomething();
                 if (result.IsSuccessStatusCode)
                 {
                     return HealthCheckResult.Healthy("Successfully connected to the service");

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myMicroservice-configmap
+data:
+  appsettings.Development.json: |-
+    {
+        "ConnectionStrings": {
+            "ClientId": "#{ClientId}#",
+            "TenantId": "#{TenantId}#",
+            "ClientSecret": "#{ClientSecret}#"
+        }
+    }
+
