@@ -14,6 +14,7 @@ spec:
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
+      automountServiceAccountToken: false
       containers:
       - name: mymicroservice-microservice
         image: mymicroservice-microservice:#{BuildRef}#
@@ -45,8 +46,10 @@ spec:
           requests:
             cpu: 50m
             memory: 512Mi
+            ephemeral-storage: "2Gi"
           limits:
             memory: 512Mi
+            ephemeral-storage: "2Gi"
       volumes:
       - name: appsettings-volume
         configMap:

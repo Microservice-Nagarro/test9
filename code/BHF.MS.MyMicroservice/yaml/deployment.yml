@@ -11,13 +11,6 @@ spec:
       labels:
         app: mymicroservice-microservice
     spec:
-      topologySpreadConstraints:
-      - maxSkew: 1
-        topologyKey: kubernetes.io/hostname
-        whenUnsatisfiable: ScheduleAnyway
-        labelSelector:
-          matchLabels:
-            app: mymicroservice-microservice
       nodeSelector:
         "kubernetes.io/os": linux
       automountServiceAccountToken: false
@@ -25,7 +18,7 @@ spec:
       - name: mymicroservice-microservice
         image: #{ContainerReg}#.azurecr.io/bhf.ms.mymicroservice:#{BuildRef}#
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         livenessProbe:
           httpGet:
             path: /healthz/live
