@@ -18,7 +18,7 @@ Write-Output "Waiting for $microserviceName to start"
 $waitResult = & kubectl wait pod -l app=$microserviceName --for=condition=Ready -n bhf-microservices --timeout=70s 2>&1
 if($LASTEXITCODE -eq 0)
 {
-	Start-Job { kubectl port-forward svc/$microserviceName 8082:80 -n bhf-microservices } | Out-Null # for entry like 8082:80 - switch left side (8082) to unique port across all the other microservices
+	Start-Job { kubectl port-forward svc/$microserviceName 8082:8080 -n bhf-microservices } | Out-Null # for entry like 8082:80 - switch left side (8082) to unique port across all the other microservices
 	Write-Output "You can access $microserviceName via http://localhost:8082"
 }
 else
