@@ -30,9 +30,7 @@ namespace BHF.MS.MyMicroservice
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
             app.UseAuthorization();
-
             app.UseResponseCaching();
 
             app.MapControllers();
