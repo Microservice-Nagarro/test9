@@ -12,6 +12,13 @@ spec:
       labels:
         app: mymicroservice-microservice
     spec:
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+        labelSelector:
+          matchLabels:
+            app: mymicroservice-microservice
       nodeSelector:
         "kubernetes.io/os": linux
       automountServiceAccountToken: false
