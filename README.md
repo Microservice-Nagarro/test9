@@ -31,6 +31,9 @@ Brief description of purpose of microservice.
 	* Args - should contain a single parameter, which equals full query string (all of those parameters are supported for every migration command)
 * Further reading: https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=vs
 
+## How to override my config entries if I'm not using minikube
+* Please just duplicate appsettings.json as "appsettings.Development.json" and override any settings here. This file is added to gitignore, so you won't push it by mistake.
+
 ## Further references
 
 Links to related Confluence pages/related third-party documentation.
