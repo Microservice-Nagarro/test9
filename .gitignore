@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 # BHF custom
 /code/BHF.MS.MyMicroservice/yaml/configMap-development.yml
+/code/BHF.MS.MyMicroservice/appsettings.Development.json
