@@ -25,7 +25,7 @@ Brief description of purpose of microservice.
 
 ### How to work with migrations
 * Every single migration command requires Args parameter containing full query string to the databse, sample command below:
-	* Add-Migration InitialMigration -Context CustomDbContext -Project BHF.MS.MyMicroservice.Database -StartupProject BHF.MS.MyMicroservice.Database -Args "Data Source=(local);Initial Catalog=MyMicroservice;User ID=[user];Password=[passwsord]"
+	* Add-Migration InitialMigration -Context CustomDbContext -Project BHF.MS.MyMicroservice.Database -StartupProject BHF.MS.MyMicroservice.Database -Args "Data Source=(local);Initial Catalog=MyMicroservice;User ID=[user];Password=[passwsord];Trust Server Certificate=True"
 	* Context - should be set to the name od DbContext class you want to execute your migration command
 	* Project and StartupProject - those should match the name of the project containing your context class
 	* Args - should contain a single parameter, which equals full query string (all of those parameters are supported for every migration command)

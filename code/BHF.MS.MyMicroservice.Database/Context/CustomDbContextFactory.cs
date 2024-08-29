@@ -10,8 +10,7 @@ namespace BHF.MS.MyMicroservice.Database.Context
         public CustomDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<CustomDbContext>();
-            optionsBuilder.UseSqlServer(args[0]);
-
+            optionsBuilder.UseSqlServer(string.Join(" ", args));
             return new CustomDbContext(optionsBuilder.Options);
         }
     }
