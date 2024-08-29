@@ -35,6 +35,10 @@ namespace BHF.MS.MyMicroservice
 
             app.MapControllers();
             DependencyInjectionInitializers.MapHealthChecks(app);
+            if (app.Environment.IsDevelopment())
+            {
+                Database.DependencyInjectionInitializers.InitializeDatabases(app.Services);
+            }
 
             await app.RunAsync();
         }

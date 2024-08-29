@@ -18,7 +18,7 @@ spec:
       - name: mymicroservice-microservice
         image: #{ContainerReg}#.azurecr.io/bhf.ms.mymicroservice:#{BuildRef}#
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         livenessProbe:
           httpGet:
             path: /healthz/live

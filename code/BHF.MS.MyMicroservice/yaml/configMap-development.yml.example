@@ -8,7 +8,8 @@ data:
         "ConnectionStrings": {
             "ClientId": "#{ClientId}#",
             "TenantId": "#{TenantId}#",
-            "ClientSecret": "#{ClientSecret}#"
+            "ClientSecret": "#{ClientSecret}#",
+            "DbMyMicroservice": "Data Source=host.minikube.internal,1433;Initial Catalog=MyMicroservice;User ID=#{DbAccount}#;Password=#{DbPassword}#;Trust Server Certificate=True"
         }
     }
 

@@ -13,7 +13,7 @@ namespace BHF.MS.MyMicroservice.Database
         {
             serviceCollection.AddDbContext<CustomDbContext>(options =>
             {
-                options.UseInMemoryDatabase("Custom");
+                options.UseSqlServer("name=ConnectionStrings:DbMyMicroservice");
             });
         }
 
@@ -28,6 +28,13 @@ namespace BHF.MS.MyMicroservice.Database
                 .AddDbContextCheck<CustomDbContext>(
                     name: $"{nameof(CustomDbContext)} health check",
                     tags: ["ready"]);
+        }
+
+        public static void InitializeDatabases(IServiceProvider serviceProvider)
+        {
+            using var scope = serviceProvider.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<CustomDbContext>();
+            db.Database.Migrate();
         }
     }
 }
