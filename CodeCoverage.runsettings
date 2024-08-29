@@ -22,7 +22,7 @@
 			<DataCollector friendlyName="XPlat code coverage">
 				<Configuration>
 					<Format>opencover,cobertura</Format>
-					<ExcludeByFile>**/Migrations/*.cs</ExcludeByFile>
+					<Exclude>[BHF.MS.MyMicroservice.Database]BHF.MS.MyMicroservice.Database.Migrations.*</Exclude>
 				</Configuration>
 			</DataCollector>
 		</DataCollectors>
