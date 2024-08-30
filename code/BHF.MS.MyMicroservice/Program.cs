@@ -19,6 +19,7 @@ namespace BHF.MS.MyMicroservice
 
             DependencyInjectionInitializers.AddApplicationInsights(builder);
             Database.DependencyInjectionInitializers.AddHealthCheckConfiguration(builder.Services);
+            DependencyInjectionInitializers.AddHealthCheckConfiguration(builder.Services);
 
             var app = builder.Build();
 
@@ -29,13 +30,15 @@ namespace BHF.MS.MyMicroservice
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
             app.UseAuthorization();
-
             app.UseResponseCaching();
 
             app.MapControllers();
             DependencyInjectionInitializers.MapHealthChecks(app);
+            if (app.Environment.IsDevelopment())
+            {
+                Database.DependencyInjectionInitializers.InitializeDatabases(app.Services);
+            }
 
             await app.RunAsync();
         }

@@ -1,10 +1,11 @@
-﻿using Azure.Identity;
+﻿using Azure.Core;
+using Azure.Identity;
+using BHF.MS.MyMicroservice.HealthCheck;
 using BHF.MS.MyMicroservice.Models.Settings;
 using BHF.MS.MyMicroservice.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using System.Diagnostics.CodeAnalysis;
-using BHF.MS.MyMicroservice.HealthCheck;
 
 namespace BHF.MS.MyMicroservice
 {
@@ -22,6 +23,14 @@ namespace BHF.MS.MyMicroservice
                 .Bind(builder.Configuration.GetSection("HealthCheck"))
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
+        }
+
+        public static void AddHealthCheckConfiguration(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddHealthChecks()
+                .AddCheck<ExampleServiceHealthCheck>(
+                    name: $"{nameof(ExampleServiceHealthCheck)} health check",
+                    tags: ["ready"]);
         }
 
         public static void AddCustomServices(IServiceCollection serviceCollection)
@@ -54,15 +63,6 @@ namespace BHF.MS.MyMicroservice
 
         public static void AddKeyVaultIntegration(WebApplicationBuilder builder)
         {
-            if (builder.Environment.IsDevelopment())
-            {
-                return;
-            }
-
-            var credentials = new DefaultAzureCredential(new DefaultAzureCredentialOptions
-            {
-                ManagedIdentityClientId = builder.Configuration.GetConnectionString("ManagedIdentityClientId")
-            });
             var connectionString = builder.Configuration.GetConnectionString("KeyVaultUri");
             if (string.IsNullOrEmpty(connectionString))
             {
@@ -70,6 +70,21 @@ namespace BHF.MS.MyMicroservice
             }
 
             var keyVaultUri = new Uri(connectionString);
+            TokenCredential credentials;
+            if (builder.Environment.IsDevelopment())
+            {
+                credentials = new ClientSecretCredential(builder.Configuration.GetConnectionString("TenantId"),
+                    builder.Configuration.GetConnectionString("ClientId"),
+                    builder.Configuration.GetConnectionString("ClientSecret"));
+            }
+            else
+            {
+                credentials = new DefaultAzureCredential(new DefaultAzureCredentialOptions
+                {
+                    ManagedIdentityClientId = builder.Configuration.GetConnectionString("ManagedIdentityClientId")
+                });
+            }
+
             builder.Configuration.AddAzureKeyVault(
                 keyVaultUri,
                 credentials);

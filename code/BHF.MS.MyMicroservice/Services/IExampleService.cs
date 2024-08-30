@@ -4,6 +4,7 @@ namespace BHF.MS.MyMicroservice.Services
 {
     public interface IExampleService
     {
-        Task<HttpResponseMessage> DoSomethingAsync(ExampleModel model);
+        Task<HttpResponseMessage> PostSomething(ExampleModel model);
+        Task<HttpResponseMessage> GetSomething();
     }
 }

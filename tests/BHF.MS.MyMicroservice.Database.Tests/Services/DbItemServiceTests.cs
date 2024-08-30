@@ -1,4 +1,3 @@
-using System.Globalization;
 using BHF.MS.MyMicroservice.Database.Context;
 using BHF.MS.MyMicroservice.Database.Context.Entities;
 using BHF.MS.MyMicroservice.Database.Models.DbItem;
@@ -7,13 +6,14 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Moq.EntityFrameworkCore;
+using System.Globalization;
 
 namespace BHF.MS.MyMicroservice.Database.Tests.Services
 {
     public sealed class DbItemServiceTests
     {
         private readonly DbItemService _sut;
-        private readonly Mock<CustomDbContext> _contextMock = new();
+        private readonly Mock<CustomDbContext> _contextMock = new(new DbContextOptions<CustomDbContext>());
 
         public DbItemServiceTests()
         {

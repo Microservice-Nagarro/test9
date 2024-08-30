@@ -1,5 +1,4 @@
 using BHF.MS.MyMicroservice.HealthCheck;
-using BHF.MS.MyMicroservice.Models;
 using BHF.MS.MyMicroservice.Models.Settings;
 using BHF.MS.MyMicroservice.Services;
 using FluentAssertions;
@@ -31,13 +30,13 @@ namespace BHF.MS.MyMicroservice.Tests.HealthCheck
         {
             // Arrange
             var responseMessage = new HttpResponseMessage(HttpStatusCode.OK);
-            _exampleServiceMock.Setup(x => x.DoSomethingAsync(It.IsAny<ExampleModel>())).ReturnsAsync(responseMessage);
+            _exampleServiceMock.Setup(x => x.GetSomething()).ReturnsAsync(responseMessage);
 
             // Act
             var result = await _sut.CheckHealthAsync(new HealthCheckContext());
 
             // Assert
-            _exampleServiceMock.Verify(x => x.DoSomethingAsync(It.IsAny<ExampleModel>()), Times.Once);
+            _exampleServiceMock.Verify(x => x.GetSomething(), Times.Once);
             result.Should().NotBeNull();
             result.Status.Should().Be(HealthStatus.Healthy);
         }
@@ -47,13 +46,13 @@ namespace BHF.MS.MyMicroservice.Tests.HealthCheck
         {
             // Arrange
             var responseMessage = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-            _exampleServiceMock.Setup(x => x.DoSomethingAsync(It.IsAny<ExampleModel>())).ReturnsAsync(responseMessage);
+            _exampleServiceMock.Setup(x => x.GetSomething()).ReturnsAsync(responseMessage);
 
             // Act
             var result = await _sut.CheckHealthAsync(new HealthCheckContext());
 
             // Assert
-            _exampleServiceMock.Verify(x => x.DoSomethingAsync(It.IsAny<ExampleModel>()), Times.Exactly(2));
+            _exampleServiceMock.Verify(x => x.GetSomething(), Times.Exactly(2));
             _loggerMock.VerifyLog(x => x.LogWarning("Failure status code returned: {StatusCode}", (int)responseMessage.StatusCode), Times.Exactly(2));
             result.Should().NotBeNull();
             result.Status.Should().Be(HealthStatus.Unhealthy);
@@ -70,7 +69,7 @@ namespace BHF.MS.MyMicroservice.Tests.HealthCheck
 
             // Assert
             result.Should().NotBeNull();
-            _exampleServiceMock.Verify(x => x.DoSomethingAsync(It.IsAny<ExampleModel>()), Times.Never);
+            _exampleServiceMock.Verify(x => x.GetSomething(), Times.Never);
             result.Status.Should().Be(HealthStatus.Unhealthy);
         }
     }

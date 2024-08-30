@@ -28,7 +28,23 @@ namespace BHF.MS.MyMicroservice.Tests.Services
         }
 
         [Fact]
-        public async Task DoSomethingAsync_ReturnsResponse()
+        public async Task GetSomething_ReturnsResponse()
+        {
+            // Arrange
+            _httpMessageHandlerMock
+                .SetupRequest(HttpMethod.Get,
+                    new Uri(_httpClient.BaseAddress!, _settings.Value.Endpoint1Uri))
+                .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK));
+
+            // Act
+            var result = await _sut.GetSomething();
+
+            // Assert
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Fact]
+        public async Task PostSomething_ReturnsResponse()
         {
             // Arrange
             var model = new ExampleModel { Title = "title", Email = "abc@abc.com", Phone = "123123123" };
@@ -38,7 +54,7 @@ namespace BHF.MS.MyMicroservice.Tests.Services
                 .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.OK));
 
             // Act
-            var result = await _sut.DoSomethingAsync(model);
+            var result = await _sut.PostSomething(model);
 
             // Assert
             result.StatusCode.Should().Be(HttpStatusCode.OK);
