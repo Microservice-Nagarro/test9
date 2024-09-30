@@ -99,9 +99,6 @@ namespace BHF.MS.MyMicroservice
 
             builder.Services.AddApplicationInsightsTelemetry();
             builder.Services.AddServiceProfiler();
-            var logLevel = (LogLevel)Enum.Parse(typeof(LogLevel),
-                builder.Configuration["Logging:ApplicationInsights:LogLevel:Default"]!);
-            builder.Services.AddApplicationInsightsKubernetesEnricher(logLevel);
         }
     }
 }
