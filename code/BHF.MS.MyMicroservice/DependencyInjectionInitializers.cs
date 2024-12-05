@@ -1,13 +1,13 @@
-﻿using Azure.Core;
+using Azure.Core;
 using Azure.Identity;
-using BHF.MS.MyMicroservice.HealthCheck;
-using BHF.MS.MyMicroservice.Models.Settings;
-using BHF.MS.MyMicroservice.Services;
+using BHF.MS.test9.HealthCheck;
+using BHF.MS.test9.Models.Settings;
+using BHF.MS.test9.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Options;
 using System.Diagnostics.CodeAnalysis;
 
-namespace BHF.MS.MyMicroservice
+namespace BHF.MS.test9
 {
     [ExcludeFromCodeCoverage(Justification = "It's an IoC initializer")]
     public static class DependencyInjectionInitializers
@@ -102,3 +102,4 @@ namespace BHF.MS.MyMicroservice
         }
     }
 }
+

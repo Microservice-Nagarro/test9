@@ -1,6 +1,6 @@
-﻿using BHF.MS.MyMicroservice.Models;
+using BHF.MS.test9.Models;
 
-namespace BHF.MS.MyMicroservice.Services
+namespace BHF.MS.test9.Services
 {
     public interface IExampleService
     {
@@ -8,3 +8,4 @@ namespace BHF.MS.MyMicroservice.Services
         Task<HttpResponseMessage> GetSomething();
     }
 }
+
